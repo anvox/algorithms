@@ -32,7 +32,27 @@ def sort(file)
 end
 
 def merge(chunk_count)
-  ""
+  # write_buffer = []
+  # buffers[chunk_count] = []
+  # while true
+  #   is_buffers_empty = true
+  #   buffers.each_with_index do |buffer, index|
+  #     buffer = load_buffer(index) if buffer.size <= 0
+  #     is_buffers_empty = is_buffers_empty && buffer.size == 0
+  #   end
+  #   break if is_buffer_empty
+  #
+  #   min_buffer_index = 0
+  #   chunk_count.times do |i|
+  #     min_buffer_index = i if buffers[i][0] < buffers[i][min_buffer_index]
+  #   end
+  #
+  #   write_buffer << buffers[min_buffer_index].shift
+  #   if write_buffer.size >= write_buffer_size_limit
+  #     append(write_buffer)
+  #     write_buffer = []
+  #   end
+  # end
 end
 
 def process(file_path)
