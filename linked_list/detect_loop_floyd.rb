@@ -10,7 +10,7 @@ end
 
 root = nil
 curr = nil
-File.read('./tests/1.txt').split(" ").each do |i|
+File.read('./tests/2.txt').split(" ").each do |i|
   node = Node.new(i.to_i)
   if root.nil?
     root = node
@@ -38,16 +38,22 @@ if curr.next_node != nil
 end
 
 # Detect
-map = {}
-curr = root
-map[curr.object_id] = 1
-while curr.next_node != nil
-  if map[curr.next_node.object_id].nil?
-    map[curr.next_node.object_id] = 1
-  else
-    puts "Looped at (#{curr.value})"
+slow = root
+fast = root
+while fast.next_node != nil && fast.next_node.next_node != nil
+  puts "slow=#{slow.value}, fast=#{fast.value}"
+  slow = slow.next_node
+  fast = fast.next_node.next_node
+
+  if slow == fast
     break
   end
+end
 
-  curr = curr.next_node
+if fast.next_node.nil? || fast.next_node.next_node.nil?
+  puts "No loop"
+elsif slow == fast
+  puts "Looped at (#{slow.value})"
+else
+  puts '?????'
 end
