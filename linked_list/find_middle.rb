@@ -12,7 +12,7 @@ end
 
 root = nil
 curr = nil
-File.read('./tests/1.txt').split(" ").each do |i|
+File.read('./tests/3.txt').split(" ").each do |i|
   node = Node.new(i.to_i)
   if root.nil?
     root = node
@@ -26,12 +26,12 @@ File.read('./tests/1.txt').split(" ").each do |i|
 end
 
 cur = root
-cur_idx = 1
+cur_idx = 0
 mid = root
-mid_idx = 1
-while cur.next_node != nil
-  puts "[#{cur_idx}]=(#{cur.value})"
+mid_idx = 0
 
+while cur != nil
+  puts "mid[#{mid_idx}]=(#{mid.value}) of cur[#{cur_idx}]=(#{cur.value})"
   cur = cur.next_node
   cur_idx += 1
 
