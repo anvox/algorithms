@@ -8,6 +8,14 @@ class Node
 
   attr_reader :value
   attr_accessor :next_node
+
+  def to_s
+    if next_node.nil?
+      "(#{value})->NIL"
+    else
+      "(#{value})->#{next_node}"
+    end
+  end
 end
 
 root = nil
@@ -26,19 +34,20 @@ File.read('./tests/3.txt').split(" ").each do |i|
 end
 
 cur = root
-cur_idx = 0
 mid = root
 mid_idx = 0
 
-while cur != nil
-  puts "mid[#{mid_idx}]=(#{mid.value}) of cur[#{cur_idx}]=(#{cur.value})"
-  cur = cur.next_node
-  cur_idx += 1
-
-  if (cur_idx / 2) > mid_idx
+while cur.next_node != nil
+  if cur.next_node.next_node != nil
+    cur = cur.next_node.next_node
     mid = mid.next_node
+
     mid_idx += 1
+  else
+    break
   end
 end
 
+puts root
 puts "Middle item is (#{mid.value}) at [#{mid_idx}]"
+
