@@ -30,7 +30,7 @@ while cursor != nil
       c2 = c2.next_node
     end
     if c2
-      cursor.next_node = c2.next_node
+      cursor.next_node = c2
     else
       cursor.next_node = nil
     end
