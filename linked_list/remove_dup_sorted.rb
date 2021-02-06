@@ -2,9 +2,6 @@
 
 require './node'
 
-def process(root_node)
-end
-
 root = nil
 curr = nil
 File.read('./tests/4.txt').split(" ").each do |i|
