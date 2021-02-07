@@ -20,50 +20,42 @@ end
 puts "Before: #{root}"
 
 def process(root_node, value1, value2)
-  if root_node.value == value1 || root_node.value == value2
-    node2 = root_node
-    while node2.next_node && (node2.next_node.value != value1 && node2.next_node.value != value2)
-      node2 = node2.next_node
+  pre_pointers = {}
+  curr_pointers = {}
+
+  prev_node = nil
+  curr = root_node
+  while curr
+    if curr.value == value1 || curr.value == value2
+      pre_pointers[curr.value] = prev_node
+      curr_pointers[curr.value] = curr
     end
 
-    if node2.next_node == nil
-      return nil
-    else
-      temp = node2.next_node
+    prev_node = curr
+    curr = curr.next_node
+  end
 
-      tail = temp.next_node
-      temp.next_node = root_node.next_node
-      root_node.next_node = tail
-      node2.next_node = root_node
-
-      return temp
-    end
+  if curr_pointers.size < 2
+    return nil
   else
-    pre_pointer = {}
-    curr = root_node
-    while curr.next_node && pre_pointer.size < 2
-      if curr.next_node.value == value1 || curr.next_node.value == value2
-        pre_pointer[curr.next_node.value] = curr
-      end
+    tail = curr_pointers[value1].next_node
+    curr_pointers[value1].next_node = curr_pointers[value2].next_node
+    curr_pointers[value2].next_node = tail
 
-      curr = curr.next_node
-    end
-
-    if pre_pointer.size < 2
-      return nil
+    if pre_pointers[value1]
+      pre_pointers[value1].next_node = curr_pointers[value2]
     else
-      tail = pre_pointer[value1].next_node.next_node
-      pre_pointer[value1].next_node.next_node = pre_pointer[value2].next_node.next_node
-      pre_pointer[value2].next_node.next_node = tail
-
-      mid = pre_pointer[value1].next_node
-      pre_pointer[value1].next_node = pre_pointer[value2].next_node
-      pre_pointer[value2].next_node = mid
-
-      return root_node
+      root_node = curr_pointers[value2]
     end
+    if pre_pointers[value2]
+      pre_pointers[value2].next_node = curr_pointers[value1]
+    else
+      root_node = curr_pointers[value1]
+    end
+
+    return root_node
   end
 end
-root = process(root, 3, 10)
+root = process(root, 3, 7)
 
 puts "After: #{root}"
