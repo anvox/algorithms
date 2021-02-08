@@ -1,12 +1,4 @@
-class Node
-  def initialize(value, next_node = nil)
-    @value = value
-    @next_node = next_node
-  end
-
-  attr_reader :value
-  attr_accessor :next_node
-end
+require './node'
 
 root = nil
 curr = nil
@@ -53,7 +45,7 @@ end
 if fast.next_node.nil? || fast.next_node.next_node.nil?
   puts "No loop"
 elsif slow == fast
-  puts "Looped at (#{slow.value})"
+  puts "Looped at (#{slow})"
 else
   puts '?????'
 end

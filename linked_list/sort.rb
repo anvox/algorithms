@@ -19,7 +19,7 @@ end
 
 puts "Before: #{root}"
 
-def sorted_inssert(root, node)
+def sorted_insert(root, node)
   if node.value <= root.value
     node.next_node = root
     return node
@@ -40,7 +40,7 @@ curr = root.next_node
 while curr != nil
   node = Node.new(curr.value)
 
-  sorted_root = sorted_inssert(sorted_root, node)
+  sorted_root = sorted_insert(sorted_root, node)
 
   curr = curr.next_node
 end

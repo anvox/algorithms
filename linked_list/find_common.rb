@@ -1,11 +1,4 @@
-class Node
-  def initialize(value, next_node = nil)
-    @value = value
-    @next_node = next_node
-  end
-
-  attr_reader :value, :next_node
-end
+require './node'
 
 a = Node.new(1, Node.new(2, Node.new(3)))
 b = Node.new(4, Node.new(5, a))
