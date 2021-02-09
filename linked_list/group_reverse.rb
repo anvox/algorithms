@@ -1,3 +1,4 @@
+require 'pry-byebug'
 require './node'
 
 def load_ll
@@ -49,6 +50,26 @@ def reverse_group_link(root, group_size)
 end
 
 def reverse_group_stack(root, group_size)
+  reversed_root = Node.new("mock")
+  reversed_cur = reversed_root
+
+  cur = root
+  stack = []
+  while cur != nil
+    stack << cur
+    cur = cur.next_node
+
+    if stack.size >= group_size || cur == nil
+      while stack.size > 0
+        reversed_cur.next_node = stack.pop
+        reversed_cur = reversed_cur.next_node
+      end
+
+      reversed_cur.next_node = nil
+    end
+  end
+
+  reversed_root.next_node
 end
 
 def reverse_alternative_group(root, group_size)
@@ -59,10 +80,10 @@ puts "Before: #{root}"
 root = reverse_group_link(root, 3)
 puts "After: #{root}"
 
-# root = load_ll
-# puts "Before: #{root}"
-# root = reverse_group_stack(root, 3)
-# puts "After: #{root}"
+root = load_ll
+puts "Before: #{root}"
+root = reverse_group_stack(root, 3)
+puts "After: #{root}"
 
 # root = load_ll
 # puts "Before: #{root}"
