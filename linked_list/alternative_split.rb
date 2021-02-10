@@ -54,6 +54,47 @@ def process(root)
   [head_even, head_odd]
 end
 
-root_even, root_odd = process(root)
+def process_using_circle(root)
+  odd = nil
+  even = nil
+
+  cur = root
+  flag = 0
+  while cur != nil
+    t = cur
+    cur = cur.next_node
+
+    if flag % 2 == 0
+      if even == nil
+        even = t
+        even.next_node = even
+      else
+        t.next_node = even.next_node
+        even.next_node = t
+
+        even = t
+      end
+    else
+      if odd == nil # 0 -> 1
+        odd = t
+        odd.next_node = odd
+      else
+        t.next_node = odd.next_node
+        odd.next_node = t
+
+        odd = t
+      end
+    end
+
+    flag =  (flag + 1) % 2
+  end
+
+  [even.next_node, odd.next_node].tap do
+    even.next_node = nil
+    odd.next_node = nil
+  end
+end
+
+root_even, root_odd = process_using_circle(root)
 
 puts "After: even: #{root_even}\nAfter: odd: #{root_odd}"
