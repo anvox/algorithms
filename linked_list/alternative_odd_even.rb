@@ -1,5 +1,3 @@
-# swap 2 node
-
 require './node'
 
 root = nil

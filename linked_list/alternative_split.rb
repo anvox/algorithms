@@ -1,4 +1,3 @@
-# swap 2 node
 require 'pry-byebug'
 require './node'
 
