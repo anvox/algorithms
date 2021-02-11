@@ -28,9 +28,9 @@ class CNode
 
   def to_s
     if next_node.nil?
-      "(#{value})->NIL"
+      "(#{value}[#{children&.value}])->NIL"
     else
-      "(#{value})->#{next_node}"
+      "(#{value}[#{children&.value}])->#{next_node}"
     end
   end
 end
