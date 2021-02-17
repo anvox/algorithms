@@ -16,6 +16,7 @@ class Node
   end
 end
 
+# Node has children
 class CNode
   def initialize(value, next_node = nil, children = nil)
     @value = value
@@ -31,6 +32,24 @@ class CNode
       "(#{value}[#{children&.value}])->NIL"
     else
       "(#{value}[#{children&.value}])->#{next_node}"
+    end
+  end
+end
+
+# Mutable node
+class MNode
+  def initialize(value, next_node = nil)
+    @value = value
+    @next_node = next_node
+  end
+
+  attr_accessor :next_node, :value
+
+  def to_s
+    if next_node.nil?
+      "(#{value})->NIL"
+    else
+      "(#{value})->#{next_node}"
     end
   end
 end
