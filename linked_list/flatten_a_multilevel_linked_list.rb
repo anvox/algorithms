@@ -1,3 +1,5 @@
+# Flatten a multilevel linked list
+
 require './node'
 
 root = CNode.new(10, CNode.new(5, CNode.new(12, CNode.new(7, CNode.new(11),
