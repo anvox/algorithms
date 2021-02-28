@@ -1,3 +1,7 @@
+# Merge two sorted linked lists
+# I use dummy node, just for different, clone is not the best one
+# the good one is in-place which is covered
+
 require './node'
 
 root = nil
