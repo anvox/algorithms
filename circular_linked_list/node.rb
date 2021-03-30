@@ -30,18 +30,26 @@ class CircularLinkedList
 
   attr_reader :root
 
+  def empty?
+    root.nil?
+  end
+
+  def single?
+    root.next_node == root
+  end
+
   def pop
-    if root.nil?
+    if empty?
       return nil
     end
-    if root.next_node == root
+    if single?
       value = root.value
       @root = nil
 
       return value
     end
 
-    prev = Node.new('dummy', root)
+    prev = root
     while prev.next_node.next_node != root
       prev = prev.next_node
     end
