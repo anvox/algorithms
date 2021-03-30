@@ -72,22 +72,34 @@ class CircularLinkedList
       return value
     end
 
-    prev = root
-    while prev.next_node != root
-      prev = prev.next_node
-    end
+    tail = find_tail
 
     value = root.value
     @root = root.next_node
-    prev.next_node = root
+    tail.next_node = root
 
-    return value
+    value
   end
 
   def push(value)
+    unshift(value)
+    @root = root.next_node
+    self
   end
 
   def unshift(value)
+    if empty?
+      @root = Node.new(value)
+      root.next_node = root
+
+      return self
+    end
+
+    tail = find_tail
+    @root = Node.new(value, root)
+    tail.next_node = root
+
+    self
   end
 
   def at(index)
@@ -97,6 +109,15 @@ class CircularLinkedList
   end
 
   def remove_at(index)
+  end
+
+  def find_tail
+    tail = root
+    while tail.next_node != root
+      tail = tail.next_node
+    end
+
+    tail
   end
 
   def to_s
@@ -111,5 +132,9 @@ class CircularLinkedList
     end
 
     "#{result}ROOT(#{root.value})"
+  end
+
+  def inspect
+    to_s
   end
 end
