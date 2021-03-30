@@ -62,6 +62,26 @@ class CircularLinkedList
   end
 
   def shift
+    if empty?
+      return nil
+    end
+    if single?
+      value = root.value
+      @root = nil
+
+      return value
+    end
+
+    prev = root
+    while prev.next_node != root
+      prev = prev.next_node
+    end
+
+    value = root.value
+    @root = root.next_node
+    prev.next_node = root
+
+    return value
   end
 
   def push(value)

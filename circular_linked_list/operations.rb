@@ -9,7 +9,11 @@ end
 list = init_circular_linked_list
 puts "Before : #{list}"
 
-while value = list.pop
-  puts "popped : #{value}"
+rev = true
+while value = rev ? list.pop : list.shift
+  puts "#{rev ? "popped" : "shifted"} : #{value}"
   puts "L : #{list}"
+
+  rev = !rev
 end
+
