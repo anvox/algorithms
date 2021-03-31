@@ -206,4 +206,20 @@ class CircularLinkedList
   def inspect
     to_s
   end
+
+  def search(value)
+    return -1 if empty?
+
+    cur = root
+    i = 0
+    while true
+      return i if cur.value == value
+      cur = cur.next_node
+
+      i += 1
+      break if cur == root
+    end
+
+    return -1
+  end
 end
