@@ -16,6 +16,12 @@ class Node
   end
 end
 
+class IndexOutOfBound < StandardError
+  def initialize(*_)
+    super("Index out of bound.")
+  end
+end
+
 class CircularLinkedList
   def initialize(arr)
     cur = dummy = Node.new('dummy')
@@ -111,6 +117,7 @@ class CircularLinkedList
     cur = root
     index.times do
       cur = cur.next_node
+      raise IndexOutOfBound.new if cur == root
     end
 
     cur
@@ -125,7 +132,10 @@ class CircularLinkedList
     end
 
     prev = root
-    (index - 1).times { prev = prev.next_node }
+    (index - 1).times do
+      prev = prev.next_node
+      raise IndexOutOfBound.new if prev == root
+    end
     prev.next_node = Node.new(value, prev.next_node)
 
     prev.next_node
@@ -147,7 +157,10 @@ class CircularLinkedList
     end
 
     prev = root
-    (index - 1).times { prev = prev.next_node }
+    (index - 1).times do
+      prev = prev.next_node
+      raise IndexOutOfBound.new if prev == root
+    end
     node = prev.next_node
     prev.next_node = node.next_node
 
