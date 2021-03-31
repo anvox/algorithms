@@ -35,6 +35,17 @@ def test_index(at_zero = false)
   puts "Removed (#{node.value}) at [#{at}]: #{list}"
 end
 
+def test_search
+  list = init_circular_linked_list
+  puts "Before : #{list}"
+
+  v = 6
+  puts "Index of value (#{v}): #{list.search(v)}"
+  v = 66
+  puts "Index of value (#{v}): #{list.search(v)}"
+end
+
 test_pop_shift
 test_index
 test_index(true)
+test_search
