@@ -35,5 +35,6 @@ def test_index(at_zero = false)
   puts "Removed (#{node.value}) at [#{at}]: #{list}"
 end
 
+test_pop_shift
 test_index
 test_index(true)
