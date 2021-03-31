@@ -102,13 +102,56 @@ class CircularLinkedList
     self
   end
 
+  # Return node at index
   def at(index)
+    if empty?
+      return nil
+    end
+
+    cur = root
+    index.times do
+      cur = cur.next_node
+    end
+
+    cur
   end
 
+  # Return inserted node
   def insert_at(index, value)
+    if empty? || index == 0
+      unshift(value)
+
+      return root
+    end
+
+    prev = root
+    (index - 1).times { prev = prev.next_node }
+    prev.next_node = Node.new(value, prev.next_node)
+
+    prev.next_node
   end
 
+  # Return removed node
   def remove_at(index)
+    if empty?
+      return nil
+    end
+    if index == 0
+      node = root
+      tail = find_tail
+
+      @root = node.next_node
+      tail.next_node = root
+
+      return node
+    end
+
+    prev = root
+    (index - 1).times { prev = prev.next_node }
+    node = prev.next_node
+    prev.next_node = node.next_node
+
+    return node
   end
 
   def find_tail
@@ -132,6 +175,19 @@ class CircularLinkedList
     end
 
     "#{result}ROOT(#{root.value})"
+  end
+
+  def length
+    return 0 if empty?
+
+    cur = root
+    i = 1
+    while cur.next_node != root
+      i += 1
+      cur = cur.next_node
+    end
+
+    i
   end
 
   def inspect
