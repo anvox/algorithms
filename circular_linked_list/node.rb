@@ -28,6 +28,13 @@ class IndexOutOfBound < StandardError
 end
 
 class CircularLinkedList
+  def self.from_root(node)
+    list = CircularLinkedList.new([])
+    list.instance_variable_set(:@root, node)
+
+    list
+  end
+
   def initialize(arr)
     cur = dummy = Node.new('dummy')
     Array(arr).each do |value|
@@ -247,5 +254,21 @@ class CircularLinkedList
     end
 
     self
+  end
+
+  # Split current circular ll into 2 cll
+  #   new cll with length count is returned
+  #   current cll has (length - count) length
+  def split_n(count)
+    tail = find_tail
+    splitted_tail = root
+    (count - 1).times { splitted_tail = splitted_tail.next_node }
+    new_root = splitted_tail.next_node
+
+    splitted_tail.next_node = root
+    tail.next_node = new_root
+
+    @root = new_root
+    self.class.from_root(splitted_tail.next_node)
   end
 end
