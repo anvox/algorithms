@@ -227,4 +227,25 @@ class CircularLinkedList
 
     return -1
   end
+
+  def delete_if(&block)
+    prev = root
+    while prev.next_node != root
+      if block.call(prev.next_node)
+        # t = prev.next_node
+        prev.next_node = prev.next_node.next_node
+        # dispose(t)
+      else
+        prev = prev.next_node
+      end
+    end
+
+    if block.call(root)
+      tail = find_tail
+      @root = root.next_node
+      tail.next_node = root
+    end
+
+    self
+  end
 end
