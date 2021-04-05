@@ -7,6 +7,11 @@ class Node
   attr_reader :value
   attr_accessor :next_node
 
+  def update(new_value)
+    @value = new_value
+    self
+  end
+
   def to_s
     if next_node.nil?
       "(#{value})->NIL"
